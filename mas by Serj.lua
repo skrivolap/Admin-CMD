@@ -1,28 +1,28 @@
 script_name('Admin-CMD')
 script_author('Serj')
-script_description('Сокращение команд для администрации')
+script_description('РЎРѕРєСЂР°С‰РµРЅРёРµ РєРѕРјР°РЅРґ РґР»СЏ Р°РґРјРёРЅРёСЃС‚СЂР°С†РёРё')
 
 
 require"lib.sampfuncs"
-require 'lib.moonloader' -- подгрузка основной библиотеки
-local sampev = require 'lib.samp.events' -- подгрузка библиотеки евентов
-local key = require 'vkeys'  -- загрузка кнопок
-local imgui = require 'imgui'   -- загрузка библиотеки imgui
-local encoding = require 'encoding' -- загружаем библиотеку encoding
-encoding.default = 'CP1251' -- указываем кодировку по умолчанию, она должна совпадать с кодировкой файла. CP1251 - это Windows-1251
-u8 = encoding.UTF8 -- и создаём короткий псевдоним для кодировщика UTF-8
+require 'lib.moonloader' -- РїРѕРґРіСЂСѓР·РєР° РѕСЃРЅРѕРІРЅРѕР№ Р±РёР±Р»РёРѕС‚РµРєРё
+local sampev = require 'lib.samp.events' -- РїРѕРґРіСЂСѓР·РєР° Р±РёР±Р»РёРѕС‚РµРєРё РµРІРµРЅС‚РѕРІ
+local key = require 'vkeys'  -- Р·Р°РіСЂСѓР·РєР° РєРЅРѕРїРѕРє
+local imgui = require 'imgui'   -- Р·Р°РіСЂСѓР·РєР° Р±РёР±Р»РёРѕС‚РµРєРё imgui
+local encoding = require 'encoding' -- Р·Р°РіСЂСѓР¶Р°РµРј Р±РёР±Р»РёРѕС‚РµРєСѓ encoding
+encoding.default = 'CP1251' -- СѓРєР°Р·С‹РІР°РµРј РєРѕРґРёСЂРѕРІРєСѓ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ, РѕРЅР° РґРѕР»Р¶РЅР° СЃРѕРІРїР°РґР°С‚СЊ СЃ РєРѕРґРёСЂРѕРІРєРѕР№ С„Р°Р№Р»Р°. CP1251 - СЌС‚Рѕ Windows-1251
+u8 = encoding.UTF8 -- Рё СЃРѕР·РґР°С‘Рј РєРѕСЂРѕС‚РєРёР№ РїСЃРµРІРґРѕРЅРёРј РґР»СЏ РєРѕРґРёСЂРѕРІС‰РёРєР° UTF-8
 local tag = "Admin-CMD v 1.0 "
 local main_window_state = imgui.ImBool(false)
 
 
 
 local samp = require('samp.events')   
- function samp.onPlayerJoin(a, b, c, d)     -- игрок подключился
+ function samp.onPlayerJoin(a, b, c, d)     -- РёРіСЂРѕРє РїРѕРґРєР»СЋС‡РёР»СЃСЏ
   if type(d) == 'string' then
-    if d == 'Serj Rosati' then           -- ник игрока
+    if d == 'Serj Rosati' then           -- РЅРёРє РёРіСЂРѕРєР°
       lua_thread.create(function()
         wait(500)
-        sampAddChatMessage(('Разработчик{bd07fd} %s подключился к серверу!'):format(d), 0xdf24c4)   -- команда в чат
+        sampAddChatMessage(('Р Р°Р·СЂР°Р±РѕС‚С‡РёРє{bd07fd} %s РїРѕРґРєР»СЋС‡РёР»СЃСЏ Рє СЃРµСЂРІРµСЂСѓ!'):format(d), 0xdf24c4)   -- РєРѕРјР°РЅРґР° РІ С‡Р°С‚
       end)
       return true
     end
@@ -31,19 +31,19 @@ end
 
 
 
-function samp.onPlayerQuit(a, b)   -- игрок вышел с игры
+function samp.onPlayerQuit(a, b)   -- РёРіСЂРѕРє РІС‹С€РµР» СЃ РёРіСЂС‹
   local c = sampGetPlayerNickname(a)
   if type(c) == 'string' then
-    if c == 'Serj Rosati' then    -- ник игрока
-      sampAddChatMessage(('Куратор{bd07fd} %s вышел с сервера'):format(c), 0xdf24c4)   -- сообщение в чат
+    if c == 'Serj Rosati' then    -- РЅРёРє РёРіСЂРѕРєР°
+      sampAddChatMessage(('РљСѓСЂР°С‚РѕСЂ{bd07fd} %s РІС‹С€РµР» СЃ СЃРµСЂРІРµСЂР°'):format(c), 0xdf24c4)   -- СЃРѕРѕР±С‰РµРЅРёРµ РІ С‡Р°С‚
     end 
   end
 end
 
 
 
-function main()   -- основной код
-	autoupdate("тут ссылка на ваш json", '['..string.upper(thisScript().name)..']: ', "тут ссылка на ваш сайт/url вашего скрипта на форуме (если нет, оставьте как в json)")
+function main()   -- РѕСЃРЅРѕРІРЅРѕР№ РєРѕРґ
+	autoupdate("https://api.jsonbin.io/b/5e4c44f2f3a83555904f1b9e/2", '['..string.upper(thisScript().name)..']: ', "https://api.jsonbin.io/b/5e4c44f2f3a83555904f1b9e/2)")
 	while not isSampAvailable() do wait(2500) end
 
 			sampAddChatMessage(tag ..  "by Serj", 0x00f0f6)
@@ -52,9 +52,9 @@ function main()   -- основной код
 		local id,time= string.match(param, "(%d+)%s+(%d+)")
 		if id~=nil and time~=nil then
 			local n = sampGetPlayerNickname(id)
-			sampSendChat("/mute "..id.." "..time.." Нарушение правил VIP-чата[/vr]")
+			sampSendChat("/mute "..id.." "..time.." РќР°СЂСѓС€РµРЅРёРµ РїСЂР°РІРёР» VIP-С‡Р°С‚Р°[/vr]")
 		else
-			sampAddChatMessage("Используйте:{df24c4} /vc [id] [minutes]", 0x097bfb)
+			sampAddChatMessage("РСЃРїРѕР»СЊР·СѓР№С‚Рµ:{df24c4} /vc [id] [minutes]", 0x097bfb)
 		end
 	end)
 	
@@ -62,9 +62,9 @@ function main()   -- основной код
 		local id= string.match(param, "(%d+)")
 		if id~=nil then
 			local n = sampGetPlayerNickname(id)
-			sampSendChat("/mute "..id.." 30 МГ")
+			sampSendChat("/mute "..id.." 30 РњР“")
 		else
-			sampAddChatMessage("Используйте:{df24c4} /mg [id]", 0x097bfb)
+			sampAddChatMessage("РСЃРїРѕР»СЊР·СѓР№С‚Рµ:{df24c4} /mg [id]", 0x097bfb)
 		end
 	end)
 	
@@ -72,10 +72,10 @@ function main()   -- основной код
 		local id= string.match(param, "(%d+)")
 		if id~=nil then
 			local n = sampGetPlayerNickname(id)
-			sampSendChat("/ban "..id.." 29 НРП ник [Сделайте Имя_Фамилия]")
-			sampAddChatMessage("[LUA]: Выдан бан игроку "..n.."["..id.."] за НонРП ник.", 0x097bfb)
+			sampSendChat("/ban "..id.." 29 РќР Рџ РЅРёРє [РЎРґРµР»Р°Р№С‚Рµ РРјСЏ_Р¤Р°РјРёР»РёСЏ]")
+			sampAddChatMessage("[LUA]: Р’С‹РґР°РЅ Р±Р°РЅ РёРіСЂРѕРєСѓ "..n.."["..id.."] Р·Р° РќРѕРЅР Рџ РЅРёРє.", 0x097bfb)
 		else
-			sampAddChatMessage("Используйте:{df24c4} /nick [id]", 0x097bfb)
+			sampAddChatMessage("РСЃРїРѕР»СЊР·СѓР№С‚Рµ:{df24c4} /nick [id]", 0x097bfb)
 		end
 	end)
 	
@@ -83,9 +83,9 @@ function main()   -- основной код
 		local id= string.match(param, "(%d+)")
 		if id~=nil then
 			local n = sampGetPlayerNickname(id)
-			sampSendChat("/mute "..id.." 30 Флуд")
+			sampSendChat("/mute "..id.." 30 Р¤Р»СѓРґ")
 		else
-			sampAddChatMessage("Используйте:{df24c4} /fl [id]", 0x097bfb)
+			sampAddChatMessage("РСЃРїРѕР»СЊР·СѓР№С‚Рµ:{df24c4} /fl [id]", 0x097bfb)
 		end
 	end)
 	
@@ -93,9 +93,9 @@ function main()   -- основной код
 		local id= string.match(param, "(%d+)")
 		if id~=nil then
 			local n = sampGetPlayerNickname(id)
-			sampSendChat("/mute "..id.." 30 Капс")
+			sampSendChat("/mute "..id.." 30 РљР°РїСЃ")
 		else
-			sampAddChatMessage("Используйте:{df24c4} /cp [id]", 0x097bfb)
+			sampAddChatMessage("РСЃРїРѕР»СЊР·СѓР№С‚Рµ:{df24c4} /cp [id]", 0x097bfb)
 		end
 	end)
 	
@@ -103,9 +103,9 @@ function main()   -- основной код
 		local id= string.match(param, "(%d+)")
 		if id~=nil then
 			local n = sampGetPlayerNickname(id)
-			sampSendChat("/mute "..id.." 60 Реклама в раб.чат")
+			sampSendChat("/mute "..id.." 60 Р РµРєР»Р°РјР° РІ СЂР°Р±.С‡Р°С‚")
 		else
-			sampAddChatMessage("Используйте:{df24c4} /rab [id]", 0x097bfb)
+			sampAddChatMessage("РСЃРїРѕР»СЊР·СѓР№С‚Рµ:{df24c4} /rab [id]", 0x097bfb)
 		end
 	end)
 	
@@ -113,10 +113,10 @@ function main()   -- основной код
 		local id= string.match(param, "(%d+)")
 		if id~=nil then
 			local n = sampGetPlayerNickname(id)
-			sampSendChat("/ban "..id.." 29 ИЗП")
-			sampAddChatMessage("[LUA]: Выдан бан игроку "..n.."["..id.."] ИЗП.", 0x097bfb)
+			sampSendChat("/ban "..id.." 29 РР—Рџ")
+			sampAddChatMessage("[LUA]: Р’С‹РґР°РЅ Р±Р°РЅ РёРіСЂРѕРєСѓ "..n.."["..id.."] РР—Рџ.", 0x097bfb)
 		else
-			sampAddChatMessage("Используйте:{df24c4} /izp [id]", 0x097bfb)
+			sampAddChatMessage("РСЃРїРѕР»СЊР·СѓР№С‚Рµ:{df24c4} /izp [id]", 0x097bfb)
 		end
 	end)
 	
@@ -124,9 +124,9 @@ function main()   -- основной код
 		local id= string.match(param, "(%d+)")
 		if id~=nil then
 			local n = sampGetPlayerNickname(id)
-			sampSendChat("/jail "..id.." 60 НПВ")
+			sampSendChat("/jail "..id.." 60 РќРџР’")
 		else
-			sampAddChatMessage("Используйте:{df24c4} /npv [id]", 0x097bfb)
+			sampAddChatMessage("РСЃРїРѕР»СЊР·СѓР№С‚Рµ:{df24c4} /npv [id]", 0x097bfb)
 		end
 	end)
 	
@@ -134,9 +134,9 @@ function main()   -- основной код
 		local id= string.match(param, "(%d+)")
 		if id~=nil then
 			local n = sampGetPlayerNickname(id)
-			sampSendChat("/warn "..id.." ТК")
+			sampSendChat("/warn "..id.." РўРљ")
 		else
-			sampAddChatMessage("Используйте:{df24c4} /tk [id]", 0x097bfb)
+			sampAddChatMessage("РСЃРїРѕР»СЊР·СѓР№С‚Рµ:{df24c4} /tk [id]", 0x097bfb)
 		end
 	end)
 	
@@ -144,9 +144,9 @@ function main()   -- основной код
 		local id= string.match(param, "(%d+)")
 		if id~=nil then
 			local n = sampGetPlayerNickname(id)
-			sampSendChat("/warn "..id.." СК")
+			sampSendChat("/warn "..id.." РЎРљ")
 		else
-			sampAddChatMessage("Используйте:{df24c4} /sk [id]", 0x097bfb)
+			sampAddChatMessage("РСЃРїРѕР»СЊР·СѓР№С‚Рµ:{df24c4} /sk [id]", 0x097bfb)
 		end
 	end)
 	
@@ -154,9 +154,9 @@ function main()   -- основной код
 		local id= string.match(param, "(%d+)")
 		if id~=nil then
 			local n = sampGetPlayerNickname(id)
-			sampSendChat("/jail "..id.." 60 ДМ")
+			sampSendChat("/jail "..id.." 60 Р”Рњ")
 		else
-			sampAddChatMessage("Используйте:{df24c4} /dm [id]", 0x097bfb)
+			sampAddChatMessage("РСЃРїРѕР»СЊР·СѓР№С‚Рµ:{df24c4} /dm [id]", 0x097bfb)
 		end
 	end)
 	
@@ -164,9 +164,9 @@ function main()   -- основной код
 		local id= string.match(param, "(%d+)")
 		if id~=nil then
 			local n = sampGetPlayerNickname(id)
-			sampSendChat("/jail "..id.." 60 ДБ")
+			sampSendChat("/jail "..id.." 60 Р”Р‘")
 		else
-			sampAddChatMessage("Используйте:{df24c4} /db [id]", 0x097bfb)
+			sampAddChatMessage("РСЃРїРѕР»СЊР·СѓР№С‚Рµ:{df24c4} /db [id]", 0x097bfb)
 		end
 	end)
 	
@@ -174,9 +174,9 @@ function main()   -- основной код
 		local id= string.match(param, "(%d+)")
 		if id~=nil then
 			local n = sampGetPlayerNickname(id)
-			sampSendChat("/jail "..id.." 300 ДМ в ЗЗ")
+			sampSendChat("/jail "..id.." 300 Р”Рњ РІ Р—Р—")
 		else
-			sampAddChatMessage("Используйте:{df24c4} /dmzz [id]", 0x097bfb)
+			sampAddChatMessage("РСЃРїРѕР»СЊР·СѓР№С‚Рµ:{df24c4} /dmzz [id]", 0x097bfb)
 		end
 	end)
 	
@@ -186,7 +186,7 @@ function main()   -- основной код
 			local n = sampGetPlayerNickname(id)
 			sampSendChat("/setskin "..id.." "..idskin.." 0")
 		else
-			sampAddChatMessage("Используйте:{df24c4} /ss [id] [idskin]", 0x097bfb)
+			sampAddChatMessage("РСЃРїРѕР»СЊР·СѓР№С‚Рµ:{df24c4} /ss [id] [idskin]", 0x097bfb)
 		end
 	end)
 	
@@ -194,10 +194,10 @@ function main()   -- основной код
 		local id= string.match(param, "(%d+)")
 		if id~=nil then
 			local n = sampGetPlayerNickname(id)
-			sampSendChat("/banip "..id.." Ракбот")
-			sampAddChatMessage("[LUA]: Выдан бан игроку "..n.."["..id.."] Ракбот.", 0x097bfb)
+			sampSendChat("/banip "..id.." Р Р°РєР±РѕС‚")
+			sampAddChatMessage("[LUA]: Р’С‹РґР°РЅ Р±Р°РЅ РёРіСЂРѕРєСѓ "..n.."["..id.."] Р Р°РєР±РѕС‚.", 0x097bfb)
 		else
-			sampAddChatMessage("Используйте:{df24c4} /rak [id]", 0x097bfb)
+			sampAddChatMessage("РСЃРїРѕР»СЊР·СѓР№С‚Рµ:{df24c4} /rak [id]", 0x097bfb)
 		end
 	end)
 	
@@ -205,9 +205,9 @@ function main()   -- основной код
 		local id= string.match(param, "(%d+)")
 		if id~=nil then
 			local n = sampGetPlayerNickname(id)
-			sampSendChat("/jail "..id.." 300 баг стрельбы")
+			sampSendChat("/jail "..id.." 300 Р±Р°Рі СЃС‚СЂРµР»СЊР±С‹")
 		else
-			sampAddChatMessage("Используйте:{df24c4} /bag [id]", 0x097bfb)
+			sampAddChatMessage("РСЃРїРѕР»СЊР·СѓР№С‚Рµ:{df24c4} /bag [id]", 0x097bfb)
 		end
 	end)
 	
@@ -222,7 +222,7 @@ end
 
 
 
-addEventHandler("onWindowMessage", function (msg, wparam, lparam)     -- закрытие имгуи окна на TAB и ESC
+addEventHandler("onWindowMessage", function (msg, wparam, lparam)     -- Р·Р°РєСЂС‹С‚РёРµ РёРјРіСѓРё РѕРєРЅР° РЅР° TAB Рё ESC
     if wparam == key.VK_ESCAPE or wparam == key.VK_TAB then
         if main_window_state.v then main_window_state.v = false consumeWindowMessage(true, true) end
     end
@@ -230,33 +230,33 @@ end)
 
 
 
-function imgui.OnDrawFrame()     -- имгуи окно с командами
+function imgui.OnDrawFrame()     -- РёРјРіСѓРё РѕРєРЅРѕ СЃ РєРѕРјР°РЅРґР°РјРё
   if (main_window_state.v) then
-	imgui.SetNextWindowPos(imgui.ImVec2(550, 250), imgui.Cond.FirstUseEver)   -- позиция
-    imgui.SetNextWindowSize(imgui.ImVec2(300, 350), imgui.Cond.FirstUseEver)  -- размер
-    imgui.Begin(u8'Команды', main_window_state)
-    imgui.Text(u8' /vc - Нарушение правил VIP-чата[/vr] ')
-	imgui.Text(u8' /mg - МГ 30 минут мута')
-	imgui.Text(u8' /cp - капс 30 минут мута')
-	imgui.Text(u8' /rab - капс 60 минут мута')
-	imgui.Text(u8' /fl - флуд 30 минут мута')
-	imgui.Text(u8' /nick - нрп ник бан на 29 дней')
-	imgui.Text(u8' /izp - ИЗП бан на 29 дней')
-	imgui.Text(u8' /npv - НПВ джайл на 60 минут')
-	imgui.Text(u8' /tk - ТК варн')
-	imgui.Text(u8' /sk - СК варн')
-	imgui.Text(u8' /dm - джайл 60 минут')
-	imgui.Text(u8' /db - джайл 60 минут')
-	imgui.Text(u8' /dmzz - джайл 300 минут')
-	imgui.Text(u8' /ss - Выдать временный скин ')
-	imgui.Text(u8' /rak - Ракбот ')
-	imgui.Text(u8' /bag - баг стрельбы 300 минут деморгана ')
+	imgui.SetNextWindowPos(imgui.ImVec2(550, 250), imgui.Cond.FirstUseEver)   -- РїРѕР·РёС†РёСЏ
+    imgui.SetNextWindowSize(imgui.ImVec2(300, 350), imgui.Cond.FirstUseEver)  -- СЂР°Р·РјРµСЂ
+    imgui.Begin(u8'РљРѕРјР°РЅРґС‹', main_window_state)
+    imgui.Text(u8' /vc - РќР°СЂСѓС€РµРЅРёРµ РїСЂР°РІРёР» VIP-С‡Р°С‚Р°[/vr] ')
+	imgui.Text(u8' /mg - РњР“ 30 РјРёРЅСѓС‚ РјСѓС‚Р°')
+	imgui.Text(u8' /cp - РєР°РїСЃ 30 РјРёРЅСѓС‚ РјСѓС‚Р°')
+	imgui.Text(u8' /rab - РєР°РїСЃ 60 РјРёРЅСѓС‚ РјСѓС‚Р°')
+	imgui.Text(u8' /fl - С„Р»СѓРґ 30 РјРёРЅСѓС‚ РјСѓС‚Р°')
+	imgui.Text(u8' /nick - РЅСЂРї РЅРёРє Р±Р°РЅ РЅР° 29 РґРЅРµР№')
+	imgui.Text(u8' /izp - РР—Рџ Р±Р°РЅ РЅР° 29 РґРЅРµР№')
+	imgui.Text(u8' /npv - РќРџР’ РґР¶Р°Р№Р» РЅР° 60 РјРёРЅСѓС‚')
+	imgui.Text(u8' /tk - РўРљ РІР°СЂРЅ')
+	imgui.Text(u8' /sk - РЎРљ РІР°СЂРЅ')
+	imgui.Text(u8' /dm - РґР¶Р°Р№Р» 60 РјРёРЅСѓС‚')
+	imgui.Text(u8' /db - РґР¶Р°Р№Р» 60 РјРёРЅСѓС‚')
+	imgui.Text(u8' /dmzz - РґР¶Р°Р№Р» 300 РјРёРЅСѓС‚')
+	imgui.Text(u8' /ss - Р’С‹РґР°С‚СЊ РІСЂРµРјРµРЅРЅС‹Р№ СЃРєРёРЅ ')
+	imgui.Text(u8' /rak - Р Р°РєР±РѕС‚ ')
+	imgui.Text(u8' /bag - Р±Р°Рі СЃС‚СЂРµР»СЊР±С‹ 300 РјРёРЅСѓС‚ РґРµРјРѕСЂРіР°РЅР° ')
     imgui.End()
   end
 end
 
 
-function autoupdate(json_url, prefix, url)   -- автообновление
+function autoupdate(json_url, prefix, url)   -- Р°РІС‚РѕРѕР±РЅРѕРІР»РµРЅРёРµ
   local dlstatus = require('moonloader').download_status
   local json = getWorkingDirectory() .. '\\'..thisScript().name..'-version.json'
   if doesFileExist(json) then os.remove(json) end
@@ -275,21 +275,21 @@ function autoupdate(json_url, prefix, url)   -- автообновление
               lua_thread.create(function(prefix)
                 local dlstatus = require('moonloader').download_status
                 local color = -1
-                sampAddChatMessage((prefix..'Обнаружено обновление. Пытаюсь обновиться c '..thisScript().version..' на '..updateversion), color)
+                sampAddChatMessage((prefix..'РћР±РЅР°СЂСѓР¶РµРЅРѕ РѕР±РЅРѕРІР»РµРЅРёРµ. РџС‹С‚Р°СЋСЃСЊ РѕР±РЅРѕРІРёС‚СЊСЃСЏ c '..thisScript().version..' РЅР° '..updateversion), color)
                 wait(250)
                 downloadUrlToFile(updatelink, thisScript().path,
                   function(id3, status1, p13, p23)
                     if status1 == dlstatus.STATUS_DOWNLOADINGDATA then
-                      print(string.format('Загружено %d из %d.', p13, p23))
+                      print(string.format('Р—Р°РіСЂСѓР¶РµРЅРѕ %d РёР· %d.', p13, p23))
                     elseif status1 == dlstatus.STATUS_ENDDOWNLOADDATA then
-                      print('Загрузка обновления завершена.')
-                      sampAddChatMessage((prefix..'Обновление завершено!'), color)
+                      print('Р—Р°РіСЂСѓР·РєР° РѕР±РЅРѕРІР»РµРЅРёСЏ Р·Р°РІРµСЂС€РµРЅР°.')
+                      sampAddChatMessage((prefix..'РћР±РЅРѕРІР»РµРЅРёРµ Р·Р°РІРµСЂС€РµРЅРѕ!'), color)
                       goupdatestatus = true
                       lua_thread.create(function() wait(500) thisScript():reload() end)
                     end
                     if status1 == dlstatus.STATUSEX_ENDDOWNLOAD then
                       if goupdatestatus == nil then
-                        sampAddChatMessage((prefix..'Обновление прошло неудачно. Запускаю устаревшую версию..'), color)
+                        sampAddChatMessage((prefix..'РћР±РЅРѕРІР»РµРЅРёРµ РїСЂРѕС€Р»Рѕ РЅРµСѓРґР°С‡РЅРѕ. Р—Р°РїСѓСЃРєР°СЋ СѓСЃС‚Р°СЂРµРІС€СѓСЋ РІРµСЂСЃРёСЋ..'), color)
                         update = false
                       end
                     end
@@ -299,11 +299,11 @@ function autoupdate(json_url, prefix, url)   -- автообновление
               )
             else
               update = false
-              print('v'..thisScript().version..': Обновление не требуется.')
+              print('v'..thisScript().version..': РћР±РЅРѕРІР»РµРЅРёРµ РЅРµ С‚СЂРµР±СѓРµС‚СЃСЏ.')
             end
           end
         else
-          print('v'..thisScript().version..': Не могу проверить обновление. Смиритесь или проверьте самостоятельно на '..url)
+          print('v'..thisScript().version..': РќРµ РјРѕРіСѓ РїСЂРѕРІРµСЂРёС‚СЊ РѕР±РЅРѕРІР»РµРЅРёРµ. РЎРјРёСЂРёС‚РµСЃСЊ РёР»Рё РїСЂРѕРІРµСЂСЊС‚Рµ СЃР°РјРѕСЃС‚РѕСЏС‚РµР»СЊРЅРѕ РЅР° '..url)
           update = false
         end
       end
